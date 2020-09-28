@@ -31,13 +31,10 @@
 
     try {
         var r = new sn_ws.RESTMessageV2('x_37463_iplookup.IPInfo', 'GetIPInfo');
-        r.setStringParameterNoEscape('specific_field', 'geo');
+        r.setStringParameterNoEscape('json', 'geo');
         r.setStringParameterNoEscape('ipaddress', current.ip_address);
 
-        var responseObj = JSON.parse(responseBody);
-        current.city = responseObj.city;
-        gs.info("City = " + current.city);
-        current.update();
+
         //override authentication profile 
         //authentication type ='basic'/ 'oauth2'
         //r.setAuthenticationProfile(authentication type, profile name);
@@ -53,6 +50,10 @@
         var response = r.execute();
         var responseBody = response.getBody();
         var httpStatus = response.getStatusCode();
+        var responseObj = JSON.parse(responseBody);
+        current.city = responseObj.city;
+        gs.info("City = " + current.city);
+        current.update();
     }
     /*catch (ex) {
            var message = ex.message;
@@ -67,7 +68,7 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>475ed2d0db2710102e500d53ca961945</sys_id>
-        <sys_mod_count>1</sys_mod_count>
+        <sys_mod_count>2</sys_mod_count>
         <sys_name>Populate IP Address City</sys_name>
         <sys_overrides/>
         <sys_package display_value="IPLookup" source="x_37463_iplookup">dcd85a9cdbe310102e500d53ca9619cf</sys_package>
@@ -75,7 +76,7 @@
         <sys_scope display_value="IPLookup">dcd85a9cdbe310102e500d53ca9619cf</sys_scope>
         <sys_update_name>sys_script_475ed2d0db2710102e500d53ca961945</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2020-09-25 13:10:07</sys_updated_on>
+        <sys_updated_on>2020-09-28 07:15:21</sys_updated_on>
         <template/>
         <when>async</when>
     </sys_script>
